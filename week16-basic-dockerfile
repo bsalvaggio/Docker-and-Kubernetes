@@ -1,0 +1,10 @@
+# Use the Ubuntu image
+FROM ubuntu
+
+# Update the package list, install Python3 and pip, and install the boto3
+RUN apt-get update && \
+    apt-get -y install python3-pip && \
+    pip3 install boto3
+
+# Set default command to run a bash shell when the container starts
+ENTRYPOINT ["/bin/bash"]
