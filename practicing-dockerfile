@@ -1,0 +1,11 @@
+FROM ubuntu
+
+RUN echo "rex rocks"
+RUN apt-get update
+RUN echo "update worked"
+RUN apt-get -y install python3-pip
+RUN echo "python installed"
+RUN pip install boto3
+RUN echo "boto3 installed"
+RUN pip list
+ENTRYPOINT ["pip3", "list"]
