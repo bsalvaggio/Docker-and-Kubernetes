@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    events {
+      worker_connections 1024;
+    }
+    http {
+      upstream backend {
+        server deployment-one-5b787c8469-tzz2q:80;
+        server deployment-two-5b787c8469-fm58w:80;
+      }
+      server {
+        listen 80;
+        root /usr/share/nginx/html;
+        index deployment_one_index.html deployment_two_index.html;
+        location / {
+          proxy_pass http://backend;
+        }
+      }
+    }
